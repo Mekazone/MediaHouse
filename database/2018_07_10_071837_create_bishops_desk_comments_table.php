@@ -1,0 +1,37 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateBishopsDeskCommentsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('bishops_desk_comments', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('postId');
+            $table->integer('date');
+            $table->string('name');
+            $table->text('comment');
+            $table->string('status');
+            $table->foreign('postId')->references('id')->on('bishop_desks');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('bishops_desk_comments');
+    }
+}
